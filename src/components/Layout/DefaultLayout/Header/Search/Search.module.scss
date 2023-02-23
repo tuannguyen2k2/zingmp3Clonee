@@ -1,0 +1,111 @@
+.search {
+    position: relative;
+    height: 40px;
+    width: 440px;
+    display: flex;
+    margin-left: 22px;
+    border-radius: 20px;
+    background-color: var(--color-alpha-bg);
+}
+
+.collapse {
+    box-shadow: 0 1px 5px 0 rgb(0 0 0 / 20%);
+    background-color: var(--color-primary-bg);
+    border-radius: 20px 20px 0 0;
+    border: 1px solid transparent;
+}
+.search-btn {
+    width: 40px;
+    height: 40px;
+    .search-icon {
+        fill: #dadada;
+        &:hover {
+            fill: #c0bbbb;
+            cursor: pointer;
+        }
+    }
+}
+
+.search-input {
+    font-size: 1.4rem;
+    font-family: var(--default-font-family);
+    width: 392px;
+    color: var(--header-color);
+    font-weight: 400;
+    background-color: transparent;
+    &::placeholder {
+        opacity: 1;
+    }
+}
+.search-result {
+    padding: 13px 10px;
+    width: 440px;
+    background-color: var(--color-primary-bg);
+    border-radius: 0 0 20px 20px;
+}
+//Result-Item
+.horizontal-line {
+    border: 1px solid hsla(0, 0%, 100%, 0.1);
+    margin: 10px 0;
+}
+.search-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding: 0 10px 8px;
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+.item-content-left {
+    display: flex;
+    align-items: center;
+}
+
+.item-content-right {
+    display: flex;
+}
+
+.singer {
+    .item-avatar {
+        border-radius: 50%;
+    }
+}
+.song {
+    .item-avatar {
+        border-radius: 4px;
+    }
+}
+.item-avatar {
+    width: 52px;
+    height: 52px;
+}
+
+.item-right {
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-name {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.item-description {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+//Action
+.icon-fill{
+    color: #60308b;
+}
