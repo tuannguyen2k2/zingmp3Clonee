@@ -1,13 +1,11 @@
 import HeadlessTippy from '@tippyjs/react/headless';
-import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
 import 'tippy.js/dist/tippy.css';
+import { GrClose } from 'react-icons/gr';
 
 import { useState } from 'react';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { BsThreeDots } from 'react-icons/bs';
-import Button from '~/components/Button';
 import { SearchIcon } from '~/components/Icon';
+import Item from '~/components/Item';
 import { Wrapper as PopperWrapper } from '~/components/Wrapper';
 import styles from './Search.module.scss';
 
@@ -15,27 +13,48 @@ const cx = classNames.bind(styles);
 
 function Search({ showToastFunc }) {
     const [haveSearchResults, setHaveSearchResults] = useState(false);
-    const [fillIconColor, setFillIconColor] = useState(false);
+    const [searchValue, setSearchValue] = useState('');
 
-    //Set noi dung tippy
-    let ContentTippyAction;
+    //Fake Data
+    const dataResult = [
+        {
+            type: 'singer',
+            name: 'HIEUTHUHAI',
+            description: 'Nghệ sĩ • 55K quan tâm',
+            src: 'https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_webp/avatars/b/f/9/6/bf969389e9de70560cede36559c8ca4a.jpg',
+            alt: 'HIEUTHUHAI',
+        },
+        {
+            type: 'singer',
+            name: 'HIEUTHUHAI',
+            description: 'Nghệ sĩ • 55K quan tâm',
+            src: 'https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_webp/avatars/b/f/9/6/bf969389e9de70560cede36559c8ca4a.jpg',
+            alt: 'HIEUTHUHAI',
+        },
+        {
+            type: 'singer',
+            name: 'HIEUTHUHAI',
+            description: 'Nghệ sĩ • 55K quan tâm',
+            src: 'https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_webp/avatars/b/f/9/6/bf969389e9de70560cede36559c8ca4a.jpg',
+            alt: 'HIEUTHUHAI',
+        },
+        {
+            type: 'song',
+            name: 'ngủ một mình (tình rất tình)',
+            description: ' HIEUTHUHAI, Negav, Kewtiie',
+            src: 'https://photo-resize-zmp3.zmdcdn.me/w165_r1x1_webp/cover/4/f/2/c/4f2c012fc22a3773d44d6c00936f1210.jpg',
+            alt: 'HIEUTHUHAI',
+        },
+        {
+            type: 'song',
+            name: 'ngủ một mình (tình rất tình)',
+            description: ' HIEUTHUHAI, Negav, Kewtiie',
+            src: 'https://photo-resize-zmp3.zmdcdn.me/w165_r1x1_webp/cover/4/f/2/c/4f2c012fc22a3773d44d6c00936f1210.jpg',
+            alt: 'HIEUTHUHAI',
+        },
+    ];
 
-    if (fillIconColor) {
-        ContentTippyAction = 'Xóa khỏi thư viện';
-    } else {
-        ContentTippyAction = 'Thêm vào thư viện';
-    }
 
-    const handleFillColor = () => {
-        if (fillIconColor) {
-            console.log(haveSearchResults);
-            setFillIconColor(false);
-            showToastFunc('Đã xóa bài hát khỏi thư viện');
-        } else {
-            setFillIconColor(true);
-            showToastFunc('Đã thêm bài hát vào thư viện');
-        }
-    };
 
     return (
         <HeadlessTippy
@@ -48,52 +67,10 @@ function Search({ showToastFunc }) {
                 <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                     <div className={cx('horizontal-line')}></div>
                     <div className={cx('search-title')}>Gợi ý kết quả</div>
-                    <div className={cx('result-item', 'singer')}>
-                        <div className={cx('item-content-left')}>
-                            <img
-                                className={cx('item-avatar')}
-                                src="https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_webp/avatars/b/f/9/6/bf969389e9de70560cede36559c8ca4a.jpg"
-                                alt="HIEUTHUHAI"
-                            />
-                            <div className={cx('item-right')}>
-                                <span className={cx('item-name')}>HIEUTHUHAI</span>
-                                <span className={cx('item-description')}>Nghệ sĩ • 55K quan tâm</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={cx('result-item', 'song')}>
-                        <div className={cx('item-content-left')}>
-                            <img
-                                className={cx('item-avatar')}
-                                src="https://photo-resize-zmp3.zmdcdn.me/w165_r1x1_webp/cover/4/f/2/c/4f2c012fc22a3773d44d6c00936f1210.jpg"
-                                alt="ngumotminh"
-                            />
-                            <div className={cx('item-right')}>
-                                <span className={cx('item-name')}>ngủ một mình</span>
-                                <span className={cx('item-description')}>HIEUTHUHAI, Nagav, Kewtiie</span>
-                            </div>
-                        </div>
-                        <div className={cx('item-content-right')}>
-                            <Tippy content={ContentTippyAction} placement="top">
-                                <div>
-                                    <Button searchResult circle onClick={handleFillColor}>
-                                        {fillIconColor ? (
-                                            <AiFillHeart className={cx('icon-fill')} /> //Fill icon color
-                                        ) : (
-                                            <AiOutlineHeart /> // Not Fill
-                                        )}
-                                    </Button>
-                                </div>
-                            </Tippy>
-                            <Tippy content="Khác" placement="top">
-                                <div>
-                                    <Button searchResult circle>
-                                        <BsThreeDots />
-                                    </Button>
-                                </div>
-                            </Tippy>
-                        </div>
-                    </div>
+
+                    {dataResult.map((data,index) => (
+                        <Item key={index} showToastFunc={showToastFunc} data={data} />
+                    ))}
                 </div>
             )}
         >
@@ -104,12 +81,23 @@ function Search({ showToastFunc }) {
                             <SearchIcon className={cx('search-icon')} width="23px" height="23px" />
                         </button>
                         <input
+                            value={searchValue}
                             onFocus={() => {
                                 setHaveSearchResults(true);
+                            }}
+                            onChange={(e) => {
+                                setSearchValue(e.target.value);
                             }}
                             className={cx('search-input')}
                             placeholder="Tìm kiếm bài hát, nghệ sĩ, lời bài hát..."
                         />
+                        {searchValue !== '' ? (
+                            <button className={cx('btn-close')} onClick={() => {setSearchValue('')}}>
+                                <GrClose />
+                            </button>
+                        ) : (
+                            ''
+                        )}
                     </div>
                 </PopperWrapper>
             </div>

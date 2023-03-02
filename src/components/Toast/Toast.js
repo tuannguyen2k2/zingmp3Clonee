@@ -1,7 +1,8 @@
-import styles from './Toast.module.scss';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { GrClose } from 'react-icons/gr';
+
+import styles from './Toast.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -20,7 +21,7 @@ function Toast({ className, data }) {
     return (
         <div key={toastContent} className={cx('container', className)}>
             <span>{toastContent}</span>
-            <button className={cx('icon-close')} onClick={() => {setCloseToast(false)}}><GrClose /></button>
+            <button className={cx('btn-close')} onClick={() => {setCloseToast(false)}}><GrClose /></button>
         </div>
     );
 }

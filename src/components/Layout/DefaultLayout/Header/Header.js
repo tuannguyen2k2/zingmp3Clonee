@@ -4,13 +4,45 @@ import { useEffect, useState } from 'react';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 import { FiSettings } from 'react-icons/fi';
 import 'tippy.js/dist/tippy.css'; // optional
+import { FaBan } from 'react-icons/fa';
+import { MdOutlineHighQuality } from 'react-icons/md';
+import { AiOutlineCheck } from "react-icons/ai";
 
 import Button from '~/components/Button';
 import { DownloadIcon, TopicIcon, VipIcon } from '~/components/Icon';
+import Menu from '~/components/Menu';
 import styles from './Header.module.scss';
 import Navigation from './Navigation';
 import Search from './Search';
 const cx = classNames.bind(styles);
+
+const MENU_SETTINGS = [
+    {
+        id: 1,
+        icon: <FaBan size={20} />,
+        text: 'Danh sách chặn',
+        children: '',
+    },
+    {
+        id: 2,
+        icon: <MdOutlineHighQuality size={20} />,
+        text: 'Chất lượng nhạc',
+        children: [
+            {
+                id: 3,
+                title: 'SQ • 128',
+                description: 'Giảm sử dụng dữ liệu cho các kết nối chậm hơn.',
+                icon:<AiOutlineCheck size={20}/>
+            },
+            {
+                id: 3,
+                title: 'HQ • 320',
+                description: 'Kết hợp tốt nhất giữa việc sử dụng dữ liệu và chất lượng âm thanh.',
+                icon:<AiOutlineCheck size={20}/>
+            },
+        ],
+    },
+];
 
 function Header({ showToastFunc }) {
     const stateHistoryWindow = window.history.state;
@@ -87,13 +119,15 @@ function Header({ showToastFunc }) {
                         </Button>
                     </div>
                 </Tippy>
-                <Tippy content="Cài đặt" placement="bottom">
-                    <div className={cx('action-btn')}>
-                        <Button header circle className={cx('setting-btn')}>
-                            <FiSettings className={cx('setting-icon')} />
-                        </Button>
-                    </div>
-                </Tippy>
+                <Menu data={MENU_SETTINGS}>
+                    <Tippy content="Cài đặt" placement="bottom">
+                        <div className={cx('action-btn')}>
+                            <Button header circle className={cx('setting-btn')}>
+                                <FiSettings className={cx('setting-icon')} />
+                            </Button>
+                        </div>
+                    </Tippy>
+                </Menu>
                 <Button header circle className={cx('avatar-user-btn')}>
                     <img
                         src="https://s120.avatar.talk.zdn.vn/1/2/9/2/3/120/f9b3b9ae6e38ee44074b0c322fe4a9ad.jpg"

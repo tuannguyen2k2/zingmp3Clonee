@@ -1,0 +1,55 @@
+.result-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+.item-content-left {
+    display: flex;
+    align-items: center;
+}
+
+.item-content-right {
+    display: flex;
+}
+
+.singer {
+    .item-avatar {
+        border-radius: 50%;
+    }
+}
+.song {
+    .item-avatar {
+        border-radius: 4px;
+    }
+}
+.item-avatar {
+    width: 52px;
+    height: 52px;
+}
+
+.item-right {
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-name {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.item-description {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+//Action
+.icon-fill{
+    color: #60308b;
+}

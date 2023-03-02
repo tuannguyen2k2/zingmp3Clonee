@@ -6,6 +6,7 @@
     margin-left: 22px;
     border-radius: 20px;
     background-color: var(--color-alpha-bg);
+    padding-right: 40px;
 }
 
 .collapse {
@@ -38,6 +39,8 @@
     }
 }
 .search-result {
+    overflow-y: scroll;
+    max-height: 300px;
     padding: 13px 10px;
     width: 440px;
     background-color: var(--color-primary-bg);
@@ -53,59 +56,18 @@
     font-weight: 700;
     padding: 0 10px 8px;
 }
-
-.result-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 10px;
+.btn-close{
+    position: absolute;
     cursor: pointer;
-    border-radius: 4px;
-    &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-    }
-}
-.item-content-left {
+    right: 16px;
+    top: 13px;
     display: flex;
     align-items: center;
-}
-
-.item-content-right {
-    display: flex;
-}
-
-.singer {
-    .item-avatar {
-        border-radius: 50%;
+    cursor: pointer;
+    path{
+        stroke: var(--text-primary-color);
     }
-}
-.song {
-    .item-avatar {
-        border-radius: 4px;
+    :hover{
+        filter: brightness(.9);
     }
-}
-.item-avatar {
-    width: 52px;
-    height: 52px;
-}
-
-.item-right {
-    padding-left: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-.item-name {
-    font-size: 1.4rem;
-    font-weight: 500;
-}
-
-.item-description {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-}
-//Action
-.icon-fill{
-    color: #60308b;
 }
