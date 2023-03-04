@@ -1,0 +1,19 @@
+.see-history-button {
+    background-color: transparent;
+    font-size: 2.4rem;
+    height: 24px;
+    color: #524c5b;
+    svg {
+        width: 22px;
+    }
+    + .see-history-button {
+        margin-left: 22px;
+    }
+}
+.enabled {
+    color: var(--text-primary-color);
+    cursor: pointer;
+    :hover {
+        color: #e4dede;
+    }
+}

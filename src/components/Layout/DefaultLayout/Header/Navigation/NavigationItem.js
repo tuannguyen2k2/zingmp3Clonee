@@ -1,9 +1,9 @@
 import classNames from 'classnames/bind';
 
-import styles from './Header.module.scss';
+import styles from './Navigation.module.scss';
 const cx = classNames.bind(styles);
 
-function Navigation({enabled,disabled, onClick,children, ...passProps}) {
+function NavigationItem({enabled,disabled, onClick,children, ...passProps}) {
     const props = {
         onClick,
         ...passProps,
@@ -23,4 +23,4 @@ function Navigation({enabled,disabled, onClick,children, ...passProps}) {
     );
 }
 
-export default Navigation;
+export default NavigationItem;
