@@ -1,98 +1,108 @@
 import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
-import 'tippy.js/dist/tippy.css';
+import { useEffect, useState } from 'react';
 import { GrClose } from 'react-icons/gr';
+import 'tippy.js/dist/tippy.css';
+import { useDebounce } from '~/components/hooks';
 
-import { useState } from 'react';
 import { SearchIcon } from '~/components/Icon';
-import Item from '~/components/Item';
 import { Wrapper as PopperWrapper } from '~/components/Wrapper';
+import * as searchServices from '~/services/searchService';
 import styles from './Search.module.scss';
+import SearchPropose from './SearchPropose';
+import SearchResults from './SearchResults';
 
 const cx = classNames.bind(styles);
 
-function Search({ showToastFunc }) {
-    const [haveSearchResults, setHaveSearchResults] = useState(false);
+function Search() {
+    const [showSearchList, setShowSearchList] = useState(false);
+    const [showResults, setShowResults] = useState(false);
     const [searchValue, setSearchValue] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const [proposeList, setProposeList] = useState([]);
 
-    //Fake Data
-    const dataResult = [
-        {
-            type: 'singer',
-            name: 'HIEUTHUHAI',
-            description: 'Nghệ sĩ • 55K quan tâm',
-            src: 'https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_webp/avatars/b/f/9/6/bf969389e9de70560cede36559c8ca4a.jpg',
-            alt: 'HIEUTHUHAI',
-        },
-        {
-            type: 'singer',
-            name: 'HIEUTHUHAI',
-            description: 'Nghệ sĩ • 55K quan tâm',
-            src: 'https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_webp/avatars/b/f/9/6/bf969389e9de70560cede36559c8ca4a.jpg',
-            alt: 'HIEUTHUHAI',
-        },
-        {
-            type: 'singer',
-            name: 'HIEUTHUHAI',
-            description: 'Nghệ sĩ • 55K quan tâm',
-            src: 'https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_webp/avatars/b/f/9/6/bf969389e9de70560cede36559c8ca4a.jpg',
-            alt: 'HIEUTHUHAI',
-        },
-        {
-            type: 'song',
-            name: 'ngủ một mình (tình rất tình)',
-            description: ' HIEUTHUHAI, Negav, Kewtiie',
-            src: 'https://photo-resize-zmp3.zmdcdn.me/w165_r1x1_webp/cover/4/f/2/c/4f2c012fc22a3773d44d6c00936f1210.jpg',
-            alt: 'HIEUTHUHAI',
-        },
-        {
-            type: 'song',
-            name: 'ngủ một mình (tình rất tình)',
-            description: ' HIEUTHUHAI, Negav, Kewtiie',
-            src: 'https://photo-resize-zmp3.zmdcdn.me/w165_r1x1_webp/cover/4/f/2/c/4f2c012fc22a3773d44d6c00936f1210.jpg',
-            alt: 'HIEUTHUHAI',
-        },
-    ];
+    const debounceValue = useDebounce(searchValue, 500);
 
+    useEffect(() => {
+        const proposeApi = async () => {
+            const res = await searchServices.search();
+            setProposeList(res.data.topSuggest);
+           
+        };
+        proposeApi();
+    }, []);
+    useEffect(() => {
+        const resultApi = async () => {
+            const res = await searchServices.search(debounceValue);
+            setSearchResults(res.data);
+        };
 
+        resultApi();
+    }, [debounceValue]);
 
     return (
         <HeadlessTippy
-            onClickOutside={() => setHaveSearchResults(false)}
+            onClickOutside={() => setShowSearchList(false)}
             interactive
             placement="bottom-end"
             offset={0}
-            visible={haveSearchResults}
+            visible={showSearchList}
             render={(attrs) => (
-                <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                    <div className={cx('horizontal-line')}></div>
-                    <div className={cx('search-title')}>Gợi ý kết quả</div>
-
-                    {dataResult.map((data,index) => (
-                        <Item key={index} showToastFunc={showToastFunc} data={data} />
-                    ))}
+                <div className={cx('wrapper')}>
+                    <div className={cx('search-list')} tabIndex="-1" {...attrs}>
+                       <div className={cx('search-list-content')}>
+                            {showResults ? (
+                                <div className={cx('search-result')}>
+                                    <div className={cx('keyword')}>
+                                        <div className={cx('keyword-title')}>Từ khóa liên quan</div>
+                                        <div className={cx('keyword-item')}>
+                                            <span className={cx('keyword-icon')}>
+                                                <SearchIcon width="20px" height="20px" />
+                                            </span>
+                                            <pre className={cx('keyword-text')}>
+                                                Tìm kiếm <span className={cx('keyword-search')}>"{searchValue}"</span>
+                                            </pre>
+                                        </div>
+                                    </div>
+                                    <SearchResults searchResults={searchResults} />
+                                </div>
+                            ) : (
+                                <SearchPropose proposeList={proposeList} />
+                            )}
+                       </div>
+                    </div>
                 </div>
             )}
         >
             <div>
                 <PopperWrapper>
-                    <div className={cx('search', haveSearchResults ? 'collapse' : '')}>
+                    <div className={cx('search', showSearchList ? 'collapse' : '')}>
                         <button className={cx('search-btn')}>
                             <SearchIcon className={cx('search-icon')} width="23px" height="23px" />
                         </button>
                         <input
                             value={searchValue}
                             onFocus={() => {
-                                setHaveSearchResults(true);
+                                setShowSearchList(true);
                             }}
                             onChange={(e) => {
                                 setSearchValue(e.target.value);
+                                if (e.target.value === '') {
+                                    setShowResults(false);
+                                } else {
+                                    setShowResults(true);
+                                }
                             }}
                             className={cx('search-input')}
                             placeholder="Tìm kiếm bài hát, nghệ sĩ, lời bài hát..."
                         />
                         {searchValue !== '' ? (
-                            <button className={cx('btn-close')} onClick={() => {setSearchValue('')}}>
+                            <button
+                                className={cx('btn-close')}
+                                onClick={() => {
+                                    setSearchValue('');
+                                }}
+                            >
                                 <GrClose />
                             </button>
                         ) : (

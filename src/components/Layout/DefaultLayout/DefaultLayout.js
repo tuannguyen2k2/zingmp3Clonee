@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, createContext } from 'react';
 import Toast from '~/components/Toast';
 import styles from './DefaultLayout.module.scss';
 import Header from './Header';
@@ -7,30 +7,34 @@ import Sidebar from './Sidebar';
 
 const cx = classNames.bind(styles);
 
+export const ToastContext = createContext();
+
 function DefaultLayout({ children }) {
-    const [data, setData] = useState('');
+    const [content, setContent] = useState('');
     const [showToast, setShowToast] = useState(false);
 
-    const showToastFunc = (childData) => {
-        setData(childData);
+    const changeContentToast = (contentToast) => {
+        setContent(contentToast);
     };
 
     useEffect(() => {
-        if (data === '') {
+        if(content=== ''){
             return;
         }
         setShowToast(true);
-    }, [data]);
+    }, [content]);
 
     return (
-        <div className={cx('wrapper')}>
-            <Sidebar />
-            <div className={cx('container')}>
-                <Header showToastFunc={showToastFunc} />
-                <div className={cx('content')}>{children}</div>
+        <ToastContext.Provider value={changeContentToast}>
+            <div className={cx('wrapper')}>
+                <Sidebar />
+                <div className={cx('container')}>
+                    <Header />
+                    <div className={cx('content')}>{children}</div>
+                </div>
+                {showToast && <Toast className={cx('toast')} content={content} />}
             </div>
-            {showToast && <Toast className={cx('toast')} data={data} />}
-        </div>
+        </ToastContext.Provider>
     );
 }
 

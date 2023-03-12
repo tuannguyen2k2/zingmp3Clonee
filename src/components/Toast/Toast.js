@@ -6,22 +6,26 @@ import styles from './Toast.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Toast({ className, data }) {
-    const [toastContent, setToastContent] = useState(data);
-
-    const [closeToast,setCloseToast] = useState(true);
+function Toast({ className, content }) {
+    const [closeToast, setCloseToast] = useState(true);
 
     useEffect(() => {
         setCloseToast(true);
-        setToastContent(data);
-    }, [data]);
-    if(closeToast === false){
-        return
+    }, [content]);
+    if (closeToast === false) {
+        return;
     }
     return (
-        <div key={toastContent} className={cx('container', className)}>
-            <span>{toastContent}</span>
-            <button className={cx('btn-close')} onClick={() => {setCloseToast(false)}}><GrClose /></button>
+        <div key={content} className={cx('container', className)}>
+            <span>{content}</span>
+            <button
+                className={cx('btn-close')}
+                onClick={() => {
+                    setCloseToast(false);
+                }}
+            >
+                <GrClose />
+            </button>
         </div>
     );
 }

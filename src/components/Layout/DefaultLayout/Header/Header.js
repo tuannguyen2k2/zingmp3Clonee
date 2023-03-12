@@ -36,7 +36,7 @@ const MENU_AVATARS = [
     },
 ];
 
-function Header({ showToastFunc }) {
+function Header() {
     const [changeOption, setChangeOption] = useState('SD');
     const [isVisibleSetting, setIsVisibleSetting] = useState(false);
     const [isVisibleAvatar, setIsVisibleAvatar] = useState(false);
@@ -85,7 +85,7 @@ function Header({ showToastFunc }) {
         <header className={cx('wrapper')}>
             <div className={cx('action-left')}>
                 <Navigation />
-                <Search showToastFunc={showToastFunc} />
+                <Search/>
             </div>
             <div className={cx('action-right')}>
                 <Button href="/download" header rounded className={cx('download-btn')}>

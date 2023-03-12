@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 8px 10px;
-    cursor: pointer;
+    color: var(--text-primary-color);
     border-radius: 4px;
     &:hover {
         background-color: rgba(255, 255, 255, 0.1);
@@ -17,20 +17,26 @@
 .item-content-right {
     display: flex;
 }
-
-.singer {
-    .item-avatar {
-        border-radius: 50%;
-    }
+.item-avatar{
+    position: relative;
 }
-.song {
-    .item-avatar {
-        border-radius: 4px;
-    }
-}
-.item-avatar {
+.item-avatar-img {
     width: 52px;
     height: 52px;
+   
+}
+.play-btn{
+    width: 52px;
+    height: 52px;
+    svg{
+        width: 20px;
+        height: 20px;
+    }
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    left: 0;
 }
 
 .item-right {
@@ -49,7 +55,23 @@
     font-weight: 500;
     color: var(--text-secondary);
 }
-//Action
-.icon-fill{
-    color: #60308b;
+.singer {
+    .item-avatar-img {
+        border-radius: 50%;
+    }
 }
+.song {
+    cursor: default;
+    .item-avatar-img {
+        border-radius: 4px;
+    }
+    .item-name{
+        &:hover {
+            color: var(--purple-primary);
+            cursor: pointer;
+        }
+    }
+}
+
+
+

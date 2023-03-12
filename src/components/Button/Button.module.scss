@@ -16,15 +16,7 @@
         filter: brightness(0.9);
     }
 }
-.searchResult{
-    height: 38px;
-    width: 38px;
-    padding: 6px;
-    margin: 0 4px;
-    &:hover {
-        background-color: hsla(0,0%,100%,0.1);
-    }
-}
+
 .circle {
     width: 40px;
     border-radius: 50%;

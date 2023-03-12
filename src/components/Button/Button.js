@@ -4,7 +4,7 @@ import styles from './Button.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Button({ href, to, className, header, searchResult, circle, rounded, ...props }) {
+function Button({ href, to, className, header, circle, rounded, ...props }) {
     let Comp = 'button';
     if (href) {
         props.href = href;
@@ -12,9 +12,8 @@ function Button({ href, to, className, header, searchResult, circle, rounded, ..
     } else if (to) {
         props.to = to;
         Comp = Link;
-    }
+    } 
     const classes = cx('wrapper', className, {
-        searchResult,
         header,
         circle,
         rounded,

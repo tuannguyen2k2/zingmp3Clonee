@@ -2,14 +2,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
+    --default-font-family: 'Inter', sans-serif;
     --color-primary-bg: #34224f;
     --color-content-bg: #170f23;
-    --default-font-family: 'Inter', sans-serif;
     --text-primary-color: #fff;
     --color-alpha-bg: #2f2739;
     --header-color: #dadada;
+    --sidebar-color:#dadada;
+    --text-item-hover:#fff;
+    --purple-primary:#9b4de0;
+    --black:#000;
+    --white:#fff;
     --text-secondary:hsla(0,0%,100%,0.5);
     --border-primary: hsla(0,0%,100%,0.1);
+    --active-btn:hsla(0,0%,100%,0.1);
+    --sidebar-bg: hsla(0,0%,100%,0.05);
+    --hover-btn:hsla(0,0%,100%,0.1);
 }
 * {
     margin: 0;
@@ -59,11 +67,12 @@ body {
 }
 //Scroll
 body ::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
 }
 
 body ::-webkit-scrollbar-thumb {
     border-radius: 4px;
+    background-color: #757575;
     -webkit-box-shadow: inset 0 0 6px rgb(0 0 0 / 50%);
 }
 body ::-webkit-scrollbar-track {
