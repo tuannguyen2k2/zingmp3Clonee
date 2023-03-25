@@ -1,5 +1,7 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState, createContext } from 'react';
+import PropTypes from 'prop-types'
+
 import Toast from '~/components/Toast';
 import styles from './DefaultLayout.module.scss';
 import Header from './Header';
@@ -36,6 +38,9 @@ function DefaultLayout({ children }) {
             </div>
         </ToastContext.Provider>
     );
+}
+DefaultLayout.propTypes = {
+    children: PropTypes.node.isRequired,
 }
 
 export default DefaultLayout;

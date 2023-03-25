@@ -2,6 +2,8 @@ import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
 import { AiOutlinePlayCircle } from 'react-icons/ai';
 import { followCursor } from 'tippy.js';
+import PropTypes from 'prop-types';
+
 import Button from '~/components/Button';
 import {
     ExploreIcon,
@@ -97,6 +99,9 @@ function TopSidebar({handleChangeAction}) {
             </div>
         ))}
         </div> );
+}
+TopSidebar.propTypes = {
+    handleChangeAction: PropTypes.func.isRequired,
 }
 
 export default TopSidebar;

@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
+
 import styles from './Button.module.scss';
+
 
 const cx = classNames.bind(styles);
 
@@ -19,6 +22,14 @@ function Button({ href, to, className, header, circle, rounded, ...props }) {
         rounded,
     });
     return <Comp className={classes} {...props}></Comp>;
+}
+Button.propTypes = {
+    href: PropTypes.string,
+    to: PropTypes.string,
+    className: PropTypes.string,
+    header: PropTypes.bool,
+    circle: PropTypes.bool,
+    rounded: PropTypes.bool,
 }
 
 export default Button;

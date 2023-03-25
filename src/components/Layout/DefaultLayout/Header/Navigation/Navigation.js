@@ -7,27 +7,26 @@ import NavigationItem from './NavigationItem';
 const cx = classNames.bind(styles);
 
 function Navigation() {
-    const stateHistoryWindow = window.history.state;
+    const indexHistoryWindow = window.history.state.idx;
     const [enableArrowLeft, setEnableArrowLeft] = useState(false);
     const [enableArrowRight, setEnableArrowRight] = useState(false);
-    const [indexHistory, setIndexHistory] = useState(stateHistoryWindow.idx);
-    const [indexCurrent] = useState(stateHistoryWindow.idx);
+    const [indexBefore, setIndexBefore] = useState(indexHistoryWindow);
+    const [indexStart] = useState(indexHistoryWindow); //indexStart will change when reload page
 
     useEffect(() => {
-        if (stateHistoryWindow.idx > indexCurrent) {
+        if (indexHistoryWindow > indexStart) {
             setEnableArrowLeft(true);
-        } else if (stateHistoryWindow.idx === indexCurrent) {
+        } else if (indexHistoryWindow === indexStart) {
             setEnableArrowLeft(false);
         }
 
-        if (stateHistoryWindow.idx > indexHistory) {
-            setIndexHistory(stateHistoryWindow.idx);
-        } else if (stateHistoryWindow.idx === indexHistory) {
+        if (indexHistoryWindow > indexBefore) {
+            setIndexBefore(indexHistoryWindow);
+        } else if (indexHistoryWindow === indexBefore) {
             setEnableArrowRight(false);
         }
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [stateHistoryWindow.idx]);
+    }, [indexHistoryWindow]);
 
     const handleGoForward = () => {
         window.history.forward();
@@ -37,26 +36,28 @@ function Navigation() {
         window.history.back();
         setEnableArrowRight(true);
     };
-    return ( <div className={cx('wrapper')}>
-        {enableArrowLeft ? (
-        <NavigationItem enabled onClick={handleGoBack}>
-            <BsArrowLeft />
-        </NavigationItem>
-    ) : (
-        <NavigationItem disabled onClick={handleGoBack}>
-            <BsArrowLeft />
-        </NavigationItem>
-    )}
-    {enableArrowRight ? (
-        <NavigationItem enabled onClick={handleGoForward}>
-            <BsArrowRight />
-        </NavigationItem>
-    ) : (
-        <NavigationItem disabled onClick={handleGoForward}>
-            <BsArrowRight />
-        </NavigationItem>
-    )} 
-    </div>);
+    return (
+        <div className={cx('wrapper')}>
+            {enableArrowLeft ? (
+                <NavigationItem enabled onClick={handleGoBack}>
+                    <BsArrowLeft />
+                </NavigationItem>
+            ) : (
+                <NavigationItem disabled onClick={handleGoBack}>
+                    <BsArrowLeft />
+                </NavigationItem>
+            )}
+            {enableArrowRight ? (
+                <NavigationItem enabled onClick={handleGoForward}>
+                    <BsArrowRight />
+                </NavigationItem>
+            ) : (
+                <NavigationItem disabled onClick={handleGoForward}>
+                    <BsArrowRight />
+                </NavigationItem>
+            )}
+        </div>
+    );
 }
 
 export default Navigation;

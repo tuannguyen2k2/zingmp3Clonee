@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import { BsPlayFill } from 'react-icons/bs';
 import 'tippy.js/dist/tippy.css';
+import PropTypes from 'prop-types';
 
 import Button from '~/components/Button';
 import Action from '../Action';
@@ -8,7 +9,7 @@ import styles from './Item.module.scss';
 
 const cx = classNames.bind(styles);
 
-function ItemSearch({ showToastFunc, song, singer,data,type, ...props}) {
+function ItemSearch({data,type, ...props}) {
    
     const classes = cx('result-item', type);
     return (
@@ -34,6 +35,10 @@ function ItemSearch({ showToastFunc, song, singer,data,type, ...props}) {
             </div>:''}
         </Button>
     );
+}
+ItemSearch.propTypes = {
+    data: PropTypes.object.isRequired,
+    type: PropTypes.string.isRequired,
 }
 
 export default ItemSearch;

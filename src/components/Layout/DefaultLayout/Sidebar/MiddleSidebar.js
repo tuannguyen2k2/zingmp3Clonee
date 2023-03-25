@@ -3,6 +3,8 @@ import classNames from 'classnames/bind';
 import { AiOutlinePlayCircle } from 'react-icons/ai';
 import { GrFormEdit } from 'react-icons/gr';
 import { followCursor } from 'tippy.js';
+import PropTypes from 'prop-types'
+
 import Button from '~/components/Button';
 import {
     CategoryIcon,
@@ -121,6 +123,9 @@ function MiddleSidebar({handleChangeAction}) {
                 ))}
             </div>
      );
+}
+MiddleSidebar.propTypes = {
+    handleChangeAction: PropTypes.func.isRequired,
 }
 
 export default MiddleSidebar;

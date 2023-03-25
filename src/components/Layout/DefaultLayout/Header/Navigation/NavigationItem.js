@@ -1,9 +1,10 @@
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types'
 
 import styles from './Navigation.module.scss';
 const cx = classNames.bind(styles);
 
-function NavigationItem({enabled,disabled, onClick,children, ...passProps}) {
+function NavigationItem({ enabled, disabled, onClick, children, ...passProps }) {
     const props = {
         onClick,
         ...passProps,
@@ -15,12 +16,19 @@ function NavigationItem({enabled,disabled, onClick,children, ...passProps}) {
             }
         });
     }
-    const classes = cx('see-history-button',{enabled,disabled})
+    const classes = cx('see-history-button', { enabled, disabled });
     return (
         <button className={classes} {...props}>
             {children}
         </button>
     );
+}
+
+NavigationItem.propTypes = {
+    enabled: PropTypes.bool,
+disabled: PropTypes.bool,
+onClick: PropTypes.func,
+children: PropTypes.node,
 }
 
 export default NavigationItem;

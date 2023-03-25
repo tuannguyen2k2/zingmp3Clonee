@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import { RiArrowRightSLine } from 'react-icons/ri';
+import PropTypes from 'prop-types'
 import Menu from './Menu';
 import styles from './Menu.module.scss';
 
@@ -45,6 +46,10 @@ function MenuItem({ data }) {
             );
         }
     }
+}
+
+MenuItem.propTypes = {
+    data: PropTypes.object.isRequired,
 }
 
 export default MenuItem;
