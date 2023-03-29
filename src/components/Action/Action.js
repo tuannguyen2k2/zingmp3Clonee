@@ -1,21 +1,22 @@
 import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
-import { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { BsThreeDots } from 'react-icons/bs';
 import 'tippy.js/dist/tippy.css';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
 import Button from '~/components/Button';
+import { toastSlice } from '../Toast/ToastSlice';
 import styles from './Action.module.scss';
-import { ToastContext } from '../Layout/DefaultLayout/DefaultLayout';
 
 const cx = classNames.bind(styles);
 
 function Action({ heartAction = false, menuAction = false }) {
     const [fillIconColor, setFillIconColor] = useState(false);
 
-    const changeContentToast = useContext(ToastContext);
+    const dispatch = useDispatch();
 
     let ContentTippyAction;
 
@@ -28,10 +29,10 @@ function Action({ heartAction = false, menuAction = false }) {
     const handleFillColor = () => {
         if (fillIconColor) {
             setFillIconColor(false);
-            changeContentToast('Đã xóa bài hát khỏi thư viện');
+            dispatch(toastSlice.actions.onToast('Đã xóa bài hát khỏi thư viện'));
         } else {
             setFillIconColor(true);
-            changeContentToast('Đã thêm bài hát vào thư viện');
+            dispatch(toastSlice.actions.onToast('Đã thêm bài hát vào thư viện'));
         }
     };
     return (

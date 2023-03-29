@@ -101,6 +101,7 @@ function Search() {
                                 className={cx('btn-close')}
                                 onClick={() => {
                                     setSearchValue('');
+                                    setShowResults(false);
                                 }}
                             >
                                 <GrClose />

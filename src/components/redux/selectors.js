@@ -1,0 +1,1 @@
+export const toastSelector = (state) => state.toast;
