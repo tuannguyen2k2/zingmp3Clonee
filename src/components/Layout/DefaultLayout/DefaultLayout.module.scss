@@ -7,9 +7,10 @@
     display: flex;
     flex-direction: column;
     margin-left: 240px;
+    overflow: hidden auto; 
+    max-height: calc(100vh - 90px);
+    margin-bottom: 90px;
 }
 .toast {
     position: fixed;
 }
-
-

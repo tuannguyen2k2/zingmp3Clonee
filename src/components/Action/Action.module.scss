@@ -1,15 +1,16 @@
-.action-wrapper{
+.wrapper{
     display: flex;
 }
-.action-btn{
+.button{
     height: 38px;
     width: 38px;
     padding: 6px;
     margin: 0 4px;
-    &:hover {
-        background-color: hsla(0,0%,100%,0.1);
-    }
 }
 .icon-fill {
     color: var(--purple-primary);
+    svg{
+        width: 16px;
+        height: 16px;
+    }
 }

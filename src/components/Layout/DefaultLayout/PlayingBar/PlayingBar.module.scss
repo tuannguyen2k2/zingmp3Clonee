@@ -1,0 +1,77 @@
+.wrapper {
+    height: 90px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: var(--player-bg);
+    z-index: 5;
+    border: 1px solid var(--border-player);
+}
+.container {
+    display: flex;
+    padding: 0 20px;
+}
+.left {
+    width: 30%;
+}
+
+.player-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+}
+.actions {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+.actions-button {
+    height: 32px;
+    width: 32px;
+    margin: 0 12px;
+    padding: 3px;
+}
+.button-play {
+    margin: 0 12px;
+    &:hover {
+        svg {
+            fill: var(--link-text-hover);
+        }
+    }
+}
+.duration-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.time-left {
+    color: var(--progress-bar);
+}
+.time-left,
+.time-right {
+    text-align: center;
+    min-width: 45px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.progress-bar {
+    width: 400px;
+    height: 2px;
+    background-color: var(--progress-bar);
+    margin: 0 10px;
+}
+
+.progress-slider {
+    height: 100%;
+    width: 0;
+    background-color: var(--progress-slider);
+}
+
+.right {
+    width: 30%;
+}

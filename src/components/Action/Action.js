@@ -8,12 +8,12 @@ import 'tippy.js/dist/tippy.css';
 import { useDispatch } from 'react-redux';
 
 import Button from '~/components/Button';
-import { toastSlice } from '../Toast/ToastSlice';
+import { toastSlice } from '../redux/Slice/ToastSlice';
 import styles from './Action.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Action({ heartAction = false, menuAction = false }) {
+function Action({ heartAction = false, menuAction = false, className }) {
     const [fillIconColor, setFillIconColor] = useState(false);
 
     const dispatch = useDispatch();
@@ -36,33 +36,28 @@ function Action({ heartAction = false, menuAction = false }) {
         }
     };
     return (
-        <div className={cx('action-wrapper')}>
+        <div className={cx('wrapper', className)}>
             {heartAction && (
                 <Tippy content={ContentTippyAction} placement="top">
-                    <div>
-                        <Button circle onClick={handleFillColor} className={cx('action-btn')}>
-                            {fillIconColor ? (
-                                <AiFillHeart className={cx('icon-fill')} /> // Fill icon color
-                            ) : (
-                                <AiOutlineHeart /> // Not Fill
-                            )}
-                        </Button>
-                    </div>
+                    <Button circle isHover onClick={handleFillColor} className={cx('button')}>
+                        {fillIconColor ? (
+                            <AiFillHeart size={16} className={cx('icon-fill')} /> // Fill icon color
+                        ) : (
+                            <AiOutlineHeart size={16} /> // Not Fill
+                        )}
+                    </Button>
                 </Tippy>
             )}
             {menuAction && (
                 <Tippy content="Khác" placement="top">
-                    <div>
-                        <Button circle className={cx('action-btn')}>
-                            <BsThreeDots />
-                        </Button>
-                    </div>
+                    <Button circle isHover className={cx('button')}>
+                        <BsThreeDots size={16} />
+                    </Button>
                 </Tippy>
             )}
         </div>
     );
 }
-
 
 Action.propTypes = {
     heartAction: PropTypes.bool.isRequired,

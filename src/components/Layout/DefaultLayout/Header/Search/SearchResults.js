@@ -1,13 +1,13 @@
 import classNames from 'classnames/bind';
 import 'tippy.js/dist/tippy.css';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
-import ItemSearch from '~/components/Item';
+import Item from '~/components/Item';
 import styles from './Search.module.scss';
 
 const cx = classNames.bind(styles);
 
-function SearchResults({ searchResults={} }) {
+function SearchResults({ searchResults = {} }) {
     const resultType = {
         songs: false,
         artists: false,
@@ -24,20 +24,15 @@ function SearchResults({ searchResults={} }) {
                 <div className={cx('horizontal-line')}></div>
                 <div className={cx('search-title')}>Gợi ý kết quả</div>
                 {resultType.artists &&
-                    searchResults.artists.map((data, index) => (
-                        <ItemSearch key={index}  data={data} type="singer" />
-                    ))}
+                    searchResults.artists.map((data, index) => <Item key={index} data={data} type="artists" />)}
                 {resultType.songs &&
-                    searchResults.songs.map((data, index) => (
-                        <ItemSearch key={index} data={data} type="song" />
-                    ))}
+                    searchResults.songs.map((data, index) => <Item key={index} data={data} type="songs" search isHover/>)}
             </div>
         );
     }
 }
 SearchResults.propTypes = {
     searchResults: PropTypes.object.isRequired,
-}
-
+};
 
 export default SearchResults;

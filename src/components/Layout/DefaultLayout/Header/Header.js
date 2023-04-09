@@ -3,10 +3,10 @@ import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { AiOutlineCheck, AiOutlinePlayCircle } from 'react-icons/ai';
 import { FaBan, FaTemperatureHigh, FaTemperatureLow } from 'react-icons/fa';
-import { FiSettings,FiUpload } from 'react-icons/fi';
+import { FiSettings, FiUpload } from 'react-icons/fi';
 import { TbArrowAutofitRight } from 'react-icons/tb';
-import { RiVipLine,RiVipCrown2Line } from "react-icons/ri";
-import { GoSignOut } from "react-icons/go";
+import { RiVipLine, RiVipCrown2Line } from 'react-icons/ri';
+import { GoSignOut } from 'react-icons/go';
 import 'tippy.js/dist/tippy.css'; // optional
 
 import Button from '~/components/Button';
@@ -80,12 +80,12 @@ function Header() {
     };
     const handleOutSideAvatar = () => {
         setIsVisibleAvatar(false);
-    }
+    };
     return (
         <header className={cx('wrapper')}>
             <div className={cx('action-left')}>
                 <Navigation />
-                <Search/>
+                <Search />
             </div>
             <div className={cx('action-right')}>
                 <Button href="/download" header rounded className={cx('download-btn')}>
@@ -93,52 +93,50 @@ function Header() {
                     <span>Tải bản Windows</span>
                 </Button>
                 <Tippy content="Chủ đề" placement="bottom">
-                    <div className={cx('action-btn')}>
-                        <Button header circle>
-                            <TopicIcon width="21px" height="21px" />
-                        </Button>
-                    </div>
+                    <Button header circle className={cx('action-btn')}>
+                        <TopicIcon width="21px" height="21px" />
+                    </Button>
                 </Tippy>
                 <Tippy content="Nâng cấp VIP" placement="bottom">
-                    <div className={cx('action-btn')}>
-                        <Button header circle>
-                            <VipIcon fill="#dadada" />
-                        </Button>
-                    </div>
+                    <Button header circle className={cx('action-btn')}>
+                        <VipIcon fill="#dadada" />
+                    </Button>
                 </Tippy>
 
                 <div className={cx('action-btn')}>
                     <Menu data={MENU_SETTINGS} isVisible={isVisibleSetting} handleOutSide={handleOutSideSetting}>
                         <Tippy content="Cài đặt" placement="bottom">
-                            {/* Tippy Error: interactive */}
-                            <div>
-                                <Button
-                                    header
-                                    circle
-                                    className={cx('setting-btn')}
-                                    onClick={() => {
-                                        isVisibleSetting ? setIsVisibleSetting(false) : setIsVisibleSetting(true);
-                                    }}
-                                >
-                                    <FiSettings className={cx('setting-icon')} />
-                                </Button>
-                            </div>
+                            <Button
+                                header
+                                circle
+                                className={cx('setting-btn')}
+                                onClick={() => {
+                                    isVisibleSetting ? setIsVisibleSetting(false) : setIsVisibleSetting(true);
+                                }}
+                            >
+                                <FiSettings className={cx('setting-icon')} />
+                            </Button>
                         </Tippy>
                     </Menu>
                 </div>
 
-             <Menu data={MENU_AVATARS} isVisible={isVisibleAvatar} handleOutSide={handleOutSideAvatar}>
-                  <div>
-                        <Button header circle className={cx('avatar-user-btn')}  onClick={() => {
-                                        isVisibleAvatar ? setIsVisibleAvatar(false) : setIsVisibleAvatar(true);
-                                    }}>
+                <Menu data={MENU_AVATARS} isVisible={isVisibleAvatar} handleOutSide={handleOutSideAvatar}>
+                    <div>
+                        <Button
+                            header
+                            circle
+                            className={cx('avatar-user-btn')}
+                            onClick={() => {
+                                isVisibleAvatar ? setIsVisibleAvatar(false) : setIsVisibleAvatar(true);
+                            }}
+                        >
                             <img
                                 src="https://s120.avatar.talk.zdn.vn/1/2/9/2/3/120/f9b3b9ae6e38ee44074b0c322fe4a9ad.jpg"
                                 alt="Avatar"
                             />
                         </Button>
-                  </div>
-             </Menu>
+                    </div>
+                </Menu>
             </div>
         </header>
     );

@@ -1,1 +1,1 @@
-export {default} from './ItemSearch';
+export {default} from './Item';

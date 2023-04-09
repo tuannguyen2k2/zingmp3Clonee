@@ -6,6 +6,9 @@ import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 import * as homeService from '~/services/homeService';
 import styles from './Slider.module.scss';
 import Button from '~/components/Button';
+import { useDispatch } from 'react-redux';
+import { musicSlice } from '~/components/redux/Slice/MusicSlice';
+import { songSlice } from '~/components/redux/Slice/SongSlice';
 
 const cx = classNames.bind(styles);
 let indexBannerOne = 0;
@@ -17,6 +20,8 @@ let isListBannerPrev = false;
 
 function Slider() {
     const [listBanner, setListBanner] = useState([]);
+
+    const dispatch = useDispatch();
     useEffect(() => {
         //Call Api
         const resultApi = async () => {
@@ -65,6 +70,12 @@ function Slider() {
             listBannerResponse[(indexBannerTwo += 1)],
             listBannerResponse[(indexBannerThree += 1)],
         ]);
+    };
+    const handleClickBanner = (item) => {
+        if (item.type === 1) {
+            dispatch(musicSlice.actions.setCurSongId(item.encodeId));
+            dispatch(songSlice.actions.setIsPlaying(true));
+        }
     };
     //HandleButton
     const handleButtonRight = () => {
@@ -133,8 +144,14 @@ function Slider() {
     }, [listBanner]);
     return (
         <div className={cx('slider')}>
-            {listBanner.map((banner) => (
-                <img className={cx('banner')} key={banner.encodeId} src={banner.banner} alt="" />
+            {listBanner.map((item) => (
+                <img
+                    className={cx('banner')}
+                    onClick={() => handleClickBanner(item)}
+                    key={item.encodeId}
+                    src={item.banner}
+                    alt=""
+                />
             ))}
             <Button circle className={cx('btn-control', 'btn-left')} onClick={handleButtonLeft}>
                 <SlArrowLeft size={30} />

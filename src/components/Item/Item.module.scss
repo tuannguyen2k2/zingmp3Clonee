@@ -5,8 +5,16 @@
     padding: 8px 10px;
     color: var(--text-primary-color);
     border-radius: 4px;
+}
+.isHover {
     &:hover {
         background-color: rgba(255, 255, 255, 0.1);
+        .play-btn {
+            display: block;
+        }
+        .action {
+            display: flex;
+        }
     }
 }
 .item-content-left {
@@ -17,18 +25,17 @@
 .item-content-right {
     display: flex;
 }
-.item-avatar{
+.item-avatar {
     position: relative;
 }
 .item-avatar-img {
     width: 52px;
     height: 52px;
-   
 }
-.play-btn{
+.play-btn {
     width: 52px;
     height: 52px;
-    svg{
+    svg {
         width: 20px;
         height: 20px;
     }
@@ -37,6 +44,7 @@
     left: 0;
     right: 0;
     left: 0;
+    display: none;
 }
 
 .item-right {
@@ -60,18 +68,38 @@
         border-radius: 50%;
     }
 }
-.song {
+.songs {
     cursor: default;
     .item-avatar-img {
         border-radius: 4px;
     }
-    .item-name{
+    .item-name {
+        color: var(--text-primary-color);
+    }
+}
+.playingBar {
+    justify-content: left;
+    padding: 10px 0;
+    .item-content-left{
+        margin-right: 30px;
+    }
+    .item-name {
+        cursor: pointer;
+    }
+    .item-avatar-img{
+        width: 64px;
+        height: 64px;
+    }
+}
+
+.search {
+    .action {
+        display: none;
+    }
+    .item-name {
         &:hover {
             color: var(--purple-primary);
             cursor: pointer;
         }
     }
 }
-
-
-

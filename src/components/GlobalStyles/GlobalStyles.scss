@@ -18,7 +18,12 @@
     --active-btn:hsla(0,0%,100%,0.1);
     --sidebar-bg: hsla(0,0%,100%,0.05);
     --hover-btn:hsla(0,0%,100%,0.1);
-}
+    --player-bg: #130c1c;
+    --border-player: hsla(0,0%,100%,0.1);
+    --link-text-hover: #c273ed;
+    --progress-bar:hsla(0,0%,100%,0.5);
+    --progress-slider: #fff;
+}   
 * {
     margin: 0;
     padding: 0;
@@ -35,7 +40,6 @@ body {
     line-height: 1.5;
     text-rendering: optimizeSpeed;
     color: var(--text-primary-color);
-    overflow: hidden scroll;
 }
 
 button {

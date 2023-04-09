@@ -22,7 +22,7 @@ function Search() {
     const [proposeList, setProposeList] = useState([]);
 
     const debounceValue = useDebounce(searchValue, 500);
-
+    // Get data topSuggest
     useEffect(() => {
         const proposeApi = async () => {
             const res = await searchServices.search();
@@ -31,12 +31,12 @@ function Search() {
         };
         proposeApi();
     }, []);
+    //Get data searchResult
     useEffect(() => {
         const resultApi = async () => {
             const res = await searchServices.search(debounceValue);
             setSearchResults(res.data);
         };
-
         resultApi();
     }, [debounceValue]);
 

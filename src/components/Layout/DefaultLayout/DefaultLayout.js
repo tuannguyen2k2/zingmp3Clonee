@@ -8,6 +8,7 @@ import Toast from '~/components/Toast';
 import styles from './DefaultLayout.module.scss';
 import Header from './Header';
 import Sidebar from './Sidebar';
+import PlayingBar from './PlayingBar';
 
 const cx = classNames.bind(styles);
 
@@ -23,6 +24,7 @@ function DefaultLayout({ children }) {
                 <Header />
                 <div className={cx('content')}>{children}</div>
             </div>
+            <PlayingBar/>
             {toast.showToast && <Toast className={cx('toast')} id={toast.id} content={toast.contentToast} />}
         </div>
     );
