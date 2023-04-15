@@ -7,12 +7,11 @@ export const infoSong = async (id) => {
                 id,
             },
         });
-        return res
-    } catch(error) {
-        console.log(error)
+        return res;
+    } catch (error) {
+        console.log(error);
     }
 };
-
 
 export const audioSong = async (id) => {
     try {
@@ -21,8 +20,21 @@ export const audioSong = async (id) => {
                 id,
             },
         });
-        return res
-    } catch(error) {
-        console.log(error)
+        return res;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const playList = async (id) => {
+    try {
+        const res = await httpRequest.get('/detailplaylist', {
+            params: {
+                id,
+            },
+        });
+        return res;
+    } catch (error) {
+        console.log(error);
     }
 };

@@ -10,16 +10,17 @@ export const songSlice = createSlice({
         setIsPlaying: (state, action) => {
             state.isPlaying = action.payload;
         },
-        setAudio: (state, action) => {
+        getAudio: (state, action) => {
             //Pause prev audio
             if (state.audio !== null) {
+                //Avoid duplicate play
                 state.audio.pause();
             }
             //Set new audio
             state.audio = action.payload;
         },
-        setInfoSong: (state, action) => {
+        getInfoSong: (state, action) => {
             state.infoSong = action.payload;
-        }
+        },
     },
 });

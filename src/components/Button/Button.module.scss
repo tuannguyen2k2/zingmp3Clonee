@@ -18,6 +18,7 @@
 }
 
 .circle {
+    height: 40px;
     width: 40px;
     border-radius: 50%;
 }
@@ -26,8 +27,17 @@
     padding: 10px 24px;
     border-radius: 20px;
 }
-.isHover{
+.isHover {
     &:hover {
-        background-color: hsla(0,0%,100%,0.1);
+        background-color: hsla(0, 0%, 100%, 0.1);
+    }
+}
+.disabled {
+    cursor: not-allowed;
+    svg{
+        fill: #89868e;
+    }
+    g {
+        fill: #89868e;
     }
 }

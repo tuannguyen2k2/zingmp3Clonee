@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import { toastSlice } from './Slice/ToastSlice';
 import { musicSlice } from './Slice/MusicSlice';
 import { songSlice } from './Slice/SongSlice';
+import { albumSlice } from './Slice/AlbumSlice';
 
 const commonConfig = {
     storage: storage,
@@ -15,7 +16,13 @@ const commonConfig = {
 const musicConfig = {
     ...commonConfig,
     key: 'music',
-    whitelist: ['curSongId'],
+    whitelist: ['curSongId', 'prevSongId'],
+};
+
+const albumConfig = {
+    ...commonConfig,
+    key: 'album',
+    whitelist: ['album'],
 };
 
 const store = configureStore({
@@ -23,6 +30,7 @@ const store = configureStore({
         toast: toastSlice.reducer,
         music: persistReducer(musicConfig, musicSlice.reducer),
         song: songSlice.reducer,
+        album: persistReducer(albumConfig, albumSlice.reducer),
     },
     middleware: [thunk],
 });

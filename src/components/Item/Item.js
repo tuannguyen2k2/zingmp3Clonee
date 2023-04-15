@@ -1,24 +1,27 @@
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
 import { BsPlayFill } from 'react-icons/bs';
 import 'tippy.js/dist/tippy.css';
-import PropTypes from 'prop-types';
 
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Button from '~/components/Button';
 import Action from '../Action';
-import styles from './Item.module.scss';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { musicSlice } from '../redux/Slice/MusicSlice';
 import { songSlice } from '../redux/Slice/SongSlice';
+import styles from './Item.module.scss';
+import { albumSlice } from '../redux/Slice/AlbumSlice';
 
 const cx = classNames.bind(styles);
 
 function Item({ data, type, playingBar, search, isHover, ...props }) {
     const classesSong = cx('result-item', 'songs', { playingBar, search, isHover });
+
     const dispatch = useDispatch();
     const handleButtonPlay = () => {
         dispatch(musicSlice.actions.setCurSongId(data.encodeId));
         dispatch(songSlice.actions.setIsPlaying(true));
+        dispatch(albumSlice.actions.setAllowGetAlbum(true));
     };
     return (
         <>

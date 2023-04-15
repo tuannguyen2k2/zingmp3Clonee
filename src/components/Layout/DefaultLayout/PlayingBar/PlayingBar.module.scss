@@ -5,7 +5,7 @@
     bottom: 0;
     background-color: var(--player-bg);
     z-index: 5;
-    border: 1px solid var(--border-player);
+    border-top: 1px solid var(--border-player);
 }
 .container {
     display: flex;
@@ -30,10 +30,17 @@
 }
 .actions-button {
     height: 32px;
-    width: 32px;
+    width: 32px !important;
     margin: 0 12px;
     padding: 3px;
 }
+.active {
+    color: var(--link-text-hover);
+    g {
+        fill: var(--link-text-hover);
+    }
+}
+
 .button-play {
     margin: 0 12px;
     &:hover {
@@ -42,17 +49,31 @@
         }
     }
 }
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+.button-loading {
+    margin: 0 12px;
+    animation: rotation 0.5s ease-in-out infinite;
+}
 .duration-bar {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 .time-left {
     color: var(--progress-bar);
 }
 .time-left,
 .time-right {
+    cursor: default;
     text-align: center;
     min-width: 45px;
     font-size: 12px;
@@ -61,11 +82,21 @@
 
 .progress-bar {
     width: 400px;
-    height: 2px;
+    height: 3px;
     background-color: var(--progress-bar);
-    margin: 0 10px;
+    margin: 4px 10px;
+    cursor: pointer;
+    overflow: hidden;
+    &:hover {
+        height: 8px;
+    }
 }
-
+.progress-bar,
+.progress-slider,
+.progress-bar-volume,
+.volume-slider {
+    border-radius: 10px;
+}
 .progress-slider {
     height: 100%;
     width: 0;
@@ -74,4 +105,22 @@
 
 .right {
     width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.button-right {
+    margin: 0 6px;
+    width: 32px;
+    height: 32px;
+}
+.button-volume {
+    margin: 0;
+}
+.volume {
+    .progress-slider{
+        width: 100%;
+    }
+    width: 80px;
+    margin: 4px 6px;
 }
