@@ -1,14 +1,13 @@
 import classNames from 'classnames/bind';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 
+import { useDispatch } from 'react-redux';
+import Button from '~/components/Button';
+import { setCurSongId } from '~/components/redux/Slice/MusicSlice';
+import { setIsPlaying } from '~/components/redux/Slice/SongSlice';
 import * as homeService from '~/services/homeService';
 import styles from './Slider.module.scss';
-import Button from '~/components/Button';
-import { useDispatch } from 'react-redux';
-import { musicSlice } from '~/components/redux/Slice/MusicSlice';
-import { songSlice } from '~/components/redux/Slice/SongSlice';
 
 const cx = classNames.bind(styles);
 let indexBannerOne = 0;
@@ -73,8 +72,8 @@ function Slider() {
     };
     const handleClickBanner = (item) => {
         if (item.type === 1) {
-            dispatch(musicSlice.actions.setCurSongId(item.encodeId));
-            dispatch(songSlice.actions.setIsPlaying(true));
+            dispatch(setCurSongId(item.encodeId));
+            dispatch(setIsPlaying(true));
         }
     };
     //HandleButton

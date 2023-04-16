@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { BsThreeDots } from 'react-icons/bs';
-import 'tippy.js/dist/tippy.css';
 import { useDispatch } from 'react-redux';
+import 'tippy.js/dist/tippy.css';
 
 import Button from '~/components/Button';
-import { toastSlice } from '../redux/Slice/ToastSlice';
+import { onToast } from '../redux/Slice/ToastSlice';
 import styles from './Action.module.scss';
 
 const cx = classNames.bind(styles);
@@ -29,10 +29,10 @@ function Action({ heartAction = false, menuAction = false, className }) {
     const handleFillColor = () => {
         if (fillIconColor) {
             setFillIconColor(false);
-            dispatch(toastSlice.actions.onToast('Đã xóa bài hát khỏi thư viện'));
+            dispatch(onToast('Đã xóa bài hát khỏi thư viện'));
         } else {
             setFillIconColor(true);
-            dispatch(toastSlice.actions.onToast('Đã thêm bài hát vào thư viện'));
+            dispatch(onToast('Đã thêm bài hát vào thư viện'));
         }
     };
     return (

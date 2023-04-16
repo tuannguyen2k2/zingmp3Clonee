@@ -7,10 +7,10 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '~/components/Button';
 import Action from '../Action';
-import { musicSlice } from '../redux/Slice/MusicSlice';
-import { songSlice } from '../redux/Slice/SongSlice';
+import { setAllowGetAlbum } from '../redux/Slice/AlbumSlice';
+import { setCurSongId } from '../redux/Slice/MusicSlice';
+import { setIsPlaying } from '../redux/Slice/SongSlice';
 import styles from './Item.module.scss';
-import { albumSlice } from '../redux/Slice/AlbumSlice';
 
 const cx = classNames.bind(styles);
 
@@ -19,9 +19,9 @@ function Item({ data, type, playingBar, search, isHover, ...props }) {
 
     const dispatch = useDispatch();
     const handleButtonPlay = () => {
-        dispatch(musicSlice.actions.setCurSongId(data.encodeId));
-        dispatch(songSlice.actions.setIsPlaying(true));
-        dispatch(albumSlice.actions.setAllowGetAlbum(true));
+        dispatch(setCurSongId(data.encodeId));
+        dispatch(setIsPlaying(true));
+        dispatch(setAllowGetAlbum(true));
     };
     return (
         <>

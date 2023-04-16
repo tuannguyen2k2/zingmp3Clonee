@@ -24,3 +24,7 @@ export const songSlice = createSlice({
         },
     },
 });
+
+export const { setIsPlaying, getAudio, getInfoSong } = songSlice.actions;
+
+export default songSlice.reducer;

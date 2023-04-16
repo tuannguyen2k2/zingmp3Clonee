@@ -15,3 +15,6 @@ export const toastSlice = createSlice({
         },
     },
 });
+
+export const {onToast} = toastSlice.actions
+export default toastSlice.reducer

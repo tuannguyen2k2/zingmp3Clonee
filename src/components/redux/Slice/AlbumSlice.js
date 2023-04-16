@@ -14,3 +14,7 @@ export const albumSlice = createSlice({
         }
     },
 });
+
+export const {setAllowGetAlbum, getAlbum} = albumSlice.actions
+
+export default albumSlice.reducer

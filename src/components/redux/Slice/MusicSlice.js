@@ -10,3 +10,7 @@ export const musicSlice = createSlice({
         },
     },
 });
+
+export const {setCurSongId} = musicSlice.actions
+
+export default musicSlice.reducer
