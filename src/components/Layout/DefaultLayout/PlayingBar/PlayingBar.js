@@ -34,6 +34,9 @@ function PlayingBar() {
     useEffect(() => {
         const resultApi = async () => {
             dispatch(setIsLoading(true));
+            if(audio !== null){
+                audio.pause();
+            }
             const resInfoSong = await songService.infoSong(curSongId);
             const resAudioSong = await songService.audioSong(curSongId);
             dispatch(setIsLoading(false));
@@ -85,6 +88,7 @@ function PlayingBar() {
         } else{
             dispatch(setAllowNext(false));
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[album])
 
     //Handle Click
