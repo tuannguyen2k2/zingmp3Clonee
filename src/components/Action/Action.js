@@ -60,7 +60,7 @@ function Action({ heartAction = false, menuAction = false, className }) {
 }
 
 Action.propTypes = {
-    heartAction: PropTypes.bool.isRequired,
-    menuAction: PropTypes.bool.isRequired,
+    heartAction: PropTypes.bool,
+    menuAction: PropTypes.bool,
 };
 export default Action;

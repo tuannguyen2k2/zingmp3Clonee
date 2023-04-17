@@ -26,7 +26,7 @@ function SearchResults({ searchResults = {} }) {
                 {resultType.artists &&
                     searchResults.artists.map((data, index) => <Item key={index} data={data} type="artists" />)}
                 {resultType.songs &&
-                    searchResults.songs.map((data, index) => <Item key={index} data={data} type="songs" search isHover/>)}
+                    searchResults.songs.map((data, index) => <Item key={index} data={data} type="songs" search isHover heartAction={true}/>)}
             </div>
         );
     }

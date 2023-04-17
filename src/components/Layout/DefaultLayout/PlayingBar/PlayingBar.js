@@ -12,7 +12,7 @@ import {
     setAllowPrevious,
     setCurVolume,
     setIsLoading,
-    setVolumeOn
+    setVolumeOn,
 } from '~/components/redux/Slice/PlayingBarSlice';
 import { albumSelector, musicSelector, playingBarSelector, songSelector } from '~/components/redux/selectors';
 import * as songService from '~/services/songService';
@@ -62,7 +62,7 @@ function PlayingBar() {
         if (repeat.type !== 'one') {
             resultApi();
         }
-        if (curSongId === album[0].encodeId) {
+        if (curSongId === album[0]?.encodeId) {
             dispatch(setAllowPrevious(false));
         } else {
             let isSongInAlbum = false;
@@ -100,7 +100,7 @@ function PlayingBar() {
         audio.volume = percent / 100;
         progressSliderVolumeRef.current.style.cssText = `width: ${percent}%`;
         dispatch(setCurVolume(audio.volume));
-        if(audio.volume !== 0){
+        if (audio.volume !== 0) {
             dispatch(setVolumeOn(true));
         }
     };
@@ -109,7 +109,7 @@ function PlayingBar() {
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <div className={cx('left')}>
-                    <Item data={infoSong} type="songs" playingBar />
+                    <Item data={infoSong} type="songs" playingBar heartAction={true}/>
                 </div>
                 <ActionBar />
                 <div className={cx('right')}>

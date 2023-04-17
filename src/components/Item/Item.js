@@ -2,26 +2,46 @@ import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import { BsPlayFill } from 'react-icons/bs';
 import 'tippy.js/dist/tippy.css';
-
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+
 import Button from '~/components/Button';
 import Action from '../Action';
 import { setAllowGetAlbum } from '../redux/Slice/AlbumSlice';
 import { setCurSongId } from '../redux/Slice/MusicSlice';
 import { setIsPlaying } from '../redux/Slice/SongSlice';
 import styles from './Item.module.scss';
+import * as songService from '~/services/songService';
+import { onToast } from '../redux/Slice/ToastSlice';
 
 const cx = classNames.bind(styles);
 
-function Item({ data, type, playingBar, search, isHover, ...props }) {
+function Item({ data, type, playingBar, search, isHover,heartAction, ...props }) {
+    const [isClickPlay, setIsClickPlay] = useState(false);
     const classesSong = cx('result-item', 'songs', { playingBar, search, isHover });
 
+    useEffect(() => {
+        if (isClickPlay) {
+            const resultApi = async () => {
+                const resAudioSong = await songService.audioSong(data.encodeId);
+                if (resAudioSong.err !== 0 ) {
+                    dispatch(onToast(resAudioSong.msg));
+                    return;
+                } else if (resAudioSong.err === 0) {
+                    dispatch(setCurSongId(data.encodeId));
+                    dispatch(setIsPlaying(true));
+                    dispatch(setAllowGetAlbum(true));
+                }
+            };
+            resultApi();
+            setIsClickPlay(false);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isClickPlay]);
     const dispatch = useDispatch();
     const handleButtonPlay = () => {
-        dispatch(setCurSongId(data.encodeId));
-        dispatch(setIsPlaying(true));
-        dispatch(setAllowGetAlbum(true));
+        setIsClickPlay(true);
     };
     return (
         <>
@@ -55,7 +75,7 @@ function Item({ data, type, playingBar, search, isHover, ...props }) {
                         </div>
                     </div>
                     <div className={cx('item-content-right')}>
-                        <Action heartAction menuAction className={cx('action')} />
+                        <Action heartAction={heartAction} menuAction className={cx('action')} />
                     </div>
                 </div>
             )}

@@ -35,7 +35,6 @@ function ActionBar() {
                 return;
             }
             if (isPlaying) {
-                console.log(curVolume)
                 if (curVolume === 0) {
                     audio.volume = 0;
                 } else {
