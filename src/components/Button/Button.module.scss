@@ -1,0 +1,43 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.header {
+    height: 40px;
+    width: max-content;
+    background-color: var(--color-alpha-bg);
+    &:hover {
+        -webkit-filter: brightness(0.9);
+        filter: brightness(0.9);
+    }
+}
+
+.circle {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.rounded {
+    color: #c273ed;
+    padding: 10px 24px;
+    border-radius: 20px;
+}
+.isHover {
+    &:hover {
+        background-color: hsla(0, 0%, 100%, 0.1);
+    }
+}
+.disabled {
+    cursor: not-allowed;
+    svg{
+        fill: #89868e;
+    }
+    g {
+        fill: #89868e;
+    }
+}

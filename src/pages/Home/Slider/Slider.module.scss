@@ -1,0 +1,136 @@
+.slider {
+    position: relative;
+    display: flex;
+    padding-top: 32px;
+    &:hover {
+        .btn-control {
+            opacity: 1;
+        }
+    }
+}
+.banner {
+    border-radius: 8px;
+    height: 210px;
+    &:hover {
+        cursor: pointer;
+    }
+}
+.banner + .banner {
+    margin-left: 30px;
+}
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+@keyframes goLeftForAnimationOne {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+@keyframes goLeftForAnimationTwo {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+@keyframes slideInPrev {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes slideOutPrev {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+}
+@keyframes goRightForAnimationOne {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+@keyframes goRightForAnimationTwo {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+.animation-next-one {
+    z-index: 1;
+    animation: goLeftForAnimationOne 0.5s, slideOut 0.8s 4s;
+}
+.animation-next-two {
+    z-index: 2;
+    animation: goLeftForAnimationTwo 0.5s;
+}
+.animation-next-three {
+    z-index: 1;
+    animation: slideIn 0.5s;
+}
+.animation-prev-one {
+    z-index: 1;
+    animation: goRightForAnimationOne 0.5s;
+}
+.animation-prev-two {
+    z-index: 2;
+    animation: goRightForAnimationTwo 0.5s;
+}
+.animation-prev-three {
+    z-index: 1;
+    animation: slideInPrev 0.5s,slideOut 0.8s 4s;
+}
+
+.btn-control {
+    z-index: 3;
+    position: absolute;
+    width: 55px !important;
+    height: 55px !important;
+    background-color: hsla(0, 0%, 100%, 0.15);
+    box-shadow: 0 2px 4px 0 rgba(226, 102, 102, 0.15);
+    opacity: 0;
+}
+
+.btn-left {
+    left: 10px;
+    top: 50%;
+}
+
+.btn-right {
+    right: 10px;
+    top: 50%;
+}

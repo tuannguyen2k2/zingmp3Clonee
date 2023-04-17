@@ -1,0 +1,114 @@
+.search {
+    position: relative;
+    height: 40px;
+    width: 440px;
+    display: flex;
+    margin-left: 22px;
+    border-radius: 20px;
+    background-color: var(--color-alpha-bg);
+    padding-right: 40px;
+}
+
+.collapse {
+    box-shadow: 0 1px 5px 0 rgb(0 0 0 / 20%);
+    background-color: var(--color-primary-bg);
+    border-radius: 20px 20px 0 0;
+    border: 1px solid transparent;
+}
+.search-btn {
+    width: 40px;
+    height: 40px;
+    .search-icon {
+        fill: #dadada;
+        &:hover {
+            fill: #c0bbbb;
+            cursor: pointer;
+        }
+    }
+}
+
+.search-input {
+    font-size: 1.4rem;
+    font-family: var(--default-font-family);
+    width: 392px;
+    color: var(--header-color);
+    font-weight: 400;
+    background-color: transparent;
+    &::placeholder {
+        opacity: 1;
+    }
+}
+.search-list {
+    padding: 13px 10px;
+    width: 440px;
+    background-color: var(--color-primary-bg);
+    border-radius: 0 0 20px 20px;
+}
+.search-list-content{
+    max-height: 300px;
+    overflow-y: scroll;
+}
+.search-title,.keyword-title,.propose-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding: 0 10px 8px;
+}
+// Search propose
+
+.propose-item,
+.keyword-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+.propose-text {
+    margin-left: 10px;
+}
+.propose-icon,
+.keyword-icon {
+    line-height: 0;
+    svg{
+        fill: #ffffff80;
+    }
+}
+
+//Keyword
+
+.keyword-search {
+    color: var(--text-item-hover);
+    font-weight: 700;
+}
+
+.keyword-text {
+    font-family: var(--default-font-family);
+    margin-left: 10px;
+}
+
+//Result
+.horizontal-line {
+    border: 1px solid hsla(0, 0%, 100%, 0.1);
+    margin: 10px 0;
+}
+
+.btn-close {
+    position: absolute;
+    cursor: pointer;
+    right: 16px;
+    top: 13px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    path {
+        stroke: var(--text-primary-color);
+    }
+    :hover {
+        filter: brightness(0.9);
+    }
+}

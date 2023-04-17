@@ -1,0 +1,80 @@
+.menu {
+    padding: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
+    width: max-content;
+    background-color: var(--color-primary-bg);
+}
+
+.menu-item {
+    width: 240px;
+    display: flex;
+    align-items: center;
+    padding: 12px 20px 12px 17px;
+    color: var(--header-color);
+    font-family: var(--default-font-family);
+    cursor: pointer;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+.line-top{
+    position: relative;
+    margin-top: 18px;
+    &::after{
+        content: "";
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: -10px;
+        height: 1px;
+        background-color: var(--border-primary);
+    }
+}
+
+.item-icon {
+    margin-right: 10px;
+    line-height: 0;
+}
+
+.item-text {
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+.item-arrow {
+    svg {
+        width: 26px;
+        height: 26px;
+    }
+    margin-left: 38px;
+    line-height: 0;
+}
+//Option
+.option{
+    width: 274px;
+}
+.option-btn{
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.option-title{
+ font-size: 1.4rem;
+ font-weight: 700;
+ color: var(-text-primary-color);
+}
+
+.option-description{
+    margin-top: 6px;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+.option-icon{
+    margin-left: 14px;
+    line-height:  0;
+    width: 20px;
+}
+
+

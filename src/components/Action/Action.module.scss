@@ -1,0 +1,16 @@
+.wrapper{
+    display: flex;
+}
+.button{
+    height: 38px;
+    width: 38px;
+    padding: 6px;
+    margin: 0 4px;
+}
+.icon-fill {
+    color: var(--purple-primary);
+    svg{
+        width: 16px;
+        height: 16px;
+    }
+}
