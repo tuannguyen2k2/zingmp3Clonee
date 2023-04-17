@@ -44,7 +44,6 @@ function PlayingBar() {
 
             try {
                 resPlayList = await songService.playList(resInfoSong?.data?.album?.encodeId);
-                dispatch(setAllowNext(true));
                 flagApi = true;
             } catch {
                 // Dont have album
@@ -54,7 +53,7 @@ function PlayingBar() {
                 try {
                     dispatch(getAlbum(resPlayList?.data?.sections[0]?.items));
                 } catch {
-                    dispatch(getAlbum(resPlayList.data.song.items));
+                    dispatch(getAlbum(resPlayList?.data?.song?.items));
                 }
                 dispatch(setAllowGetAlbum(false));
             }
@@ -64,6 +63,7 @@ function PlayingBar() {
         }
         if (curSongId === album[0]?.encodeId) {
             dispatch(setAllowPrevious(false));
+            console.log('hi');
         } else {
             let isSongInAlbum = false;
             album.forEach((song, index) => {
@@ -79,6 +79,13 @@ function PlayingBar() {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [curSongId]);
+    useEffect(() => {
+        if (album.length > 1) {
+            dispatch(setAllowNext(true));
+        } else{
+            dispatch(setAllowNext(false));
+        }
+    },[album])
 
     //Handle Click
 

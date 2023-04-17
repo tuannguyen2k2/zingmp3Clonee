@@ -5,7 +5,7 @@ export const PlayingBarSlice = createSlice({
     initialState: {
         curTimeAudio: 0,
         allowPrevious: false,
-        allowNext: true,
+        allowNext: false,
         isLoading: false,
         isRandom: false,
         volumeOn: true,
