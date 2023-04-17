@@ -37,13 +37,13 @@ function PlayingBar() {
             const resInfoSong = await songService.infoSong(curSongId);
             const resAudioSong = await songService.audioSong(curSongId);
             dispatch(setIsLoading(false));
-            dispatch(getAudio(new Audio(resAudioSong.data[128])));
-            dispatch(getInfoSong(resInfoSong.data));
+            dispatch(getAudio(new Audio(resAudioSong?.data[128])));
+            dispatch(getInfoSong(resInfoSong?.data));
             let resPlayList;
             let flagApi = false;
 
             try {
-                resPlayList = await songService.playList(resInfoSong.data.album.encodeId);
+                resPlayList = await songService.playList(resInfoSong?.data?.album?.encodeId);
                 dispatch(setAllowNext(true));
                 flagApi = true;
             } catch {
@@ -52,7 +52,7 @@ function PlayingBar() {
             }
             if (allowGetAlbum && flagApi) {
                 try {
-                    dispatch(getAlbum(resPlayList.data.sections[0].items));
+                    dispatch(getAlbum(resPlayList?.data?.sections[0]?.items));
                 } catch {
                     dispatch(getAlbum(resPlayList.data.song.items));
                 }
@@ -109,7 +109,7 @@ function PlayingBar() {
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <div className={cx('left')}>
-                    <Item data={infoSong} type="songs" playingBar heartAction={true}/>
+                    <Item data={infoSong} type="songs" playingBar heartAction={true} />
                 </div>
                 <ActionBar />
                 <div className={cx('right')}>
