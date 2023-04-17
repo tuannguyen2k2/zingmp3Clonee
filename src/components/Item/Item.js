@@ -24,12 +24,12 @@ function Item({ data, type, playingBar, search, isHover,heartAction, ...props })
     useEffect(() => {
         if (isClickPlay) {
             const resultApi = async () => {
-                const resAudioSong = await songService.audioSong(data.encodeId);
+                const resAudioSong = await songService.audioSong(data?.encodeId);
                 if (resAudioSong.err !== 0 ) {
                     dispatch(onToast(resAudioSong.msg));
                     return;
                 } else if (resAudioSong.err === 0) {
-                    dispatch(setCurSongId(data.encodeId));
+                    dispatch(setCurSongId(data?.encodeId));
                     dispatch(setIsPlaying(true));
                     dispatch(setAllowGetAlbum(true));
                 }
@@ -49,11 +49,11 @@ function Item({ data, type, playingBar, search, isHover,heartAction, ...props })
                 <Button to="/mymusic" className={cx('result-item')}>
                     <div className={cx('item-content-left')}>
                         <div className={cx('item-avatar')}>
-                            <img className={cx('item-avatar-img')} src={data.thumbnail} alt={data.alias} />
+                            <img className={cx('item-avatar-img')} src={data?.thumbnail} alt={data?.alias} />
                         </div>
                         <div className={cx('item-right')}>
-                            <span className={cx('item-name')}>{data.title || data.name}</span>
-                            <span className={cx('item-description')}>{data.artistsNames || data.alias}</span>
+                            <span className={cx('item-name')}>{data?.title || data?.name}</span>
+                            <span className={cx('item-description')}>{data?.artistsNames || data?.alias}</span>
                         </div>
                     </div>
                 </Button>
@@ -62,16 +62,16 @@ function Item({ data, type, playingBar, search, isHover,heartAction, ...props })
                 <div className={classesSong}>
                     <div className={cx('item-content-left')}>
                         <div className={cx('item-avatar')}>
-                            <img className={cx('item-avatar-img')} src={data.thumbnail} alt={data.alias} />
+                            <img className={cx('item-avatar-img')} src={data?.thumbnail} alt={data?.alias} />
                             <Button className={cx('play-btn')} onClick={handleButtonPlay}>
                                 <BsPlayFill />
                             </Button>
                         </div>
                         <div className={cx('item-right')}>
                             <Link to="/mymusic" className={cx('item-name')}>
-                                {data.title || data.name}
+                                {data?.title || data?.name}
                             </Link>
-                            <span className={cx('item-description')}>{data.artistsNames || data.alias}</span>
+                            <span className={cx('item-description')}>{data?.artistsNames || data?.alias}</span>
                         </div>
                     </div>
                     <div className={cx('item-content-right')}>

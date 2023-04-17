@@ -62,7 +62,6 @@ function ActionBar() {
         const handleEnded = () => {
             if (isRandom) {
                 randomSong();
-                console.log('random');
             } else if (repeat.type === 'one') {
                 audio.play();
             } else {

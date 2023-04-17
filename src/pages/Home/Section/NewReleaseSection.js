@@ -28,7 +28,6 @@ function NewReleaseSection() {
         resultApi();
     }, []);
     useEffect(() => {
-        console.log(dataTable);
         if (genresSelect === 0) {
             setDataTable(newRelease?.items?.all);
         } else if (genresSelect === 1) {

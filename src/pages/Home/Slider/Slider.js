@@ -26,7 +26,7 @@ function Slider() {
         const resultApi = async () => {
             const res = await homeService.home();
             //Assign data banner for listBannerResponse
-            listBannerResponse = res.data.items[0].items;
+            listBannerResponse = res?.data?.items[0]?.items;
             //Set default 3 banner
             setListBanner([
                 listBannerResponse[indexBannerOne],
@@ -72,7 +72,7 @@ function Slider() {
     };
     const handleClickBanner = (item) => {
         if (item.type === 1) {
-            dispatch(setCurSongId(item.encodeId));
+            dispatch(setCurSongId(item?.encodeId));
             dispatch(setIsPlaying(true));
         }
     };
@@ -101,14 +101,14 @@ function Slider() {
         if (isListBannerNext) {
             //Add animation
             for (let item of listBannerElement) {
-                if (item.src === listBanner[2].banner) {
+                if (item.src === listBanner[2]?.banner) {
                     item.classList.add(cx('animation-next-three'));
                 }
-                if (item.src === listBanner[1].banner) {
+                if (item.src === listBanner[1]?.banner) {
                     item.classList.remove(cx('animation-next-three'));
                     item.classList.add(cx('animation-next-two'));
                 }
-                if (item.src === listBanner[0].banner) {
+                if (item.src === listBanner[0]?.banner) {
                     item.classList.remove(cx('animation-next-two'));
                     item.classList.add(cx('animation-next-one'));
                 }
@@ -116,14 +116,14 @@ function Slider() {
         } else if (isListBannerPrev) {
             //Add animation
             for (let item of listBannerElement) {
-                if (item.src === listBanner[0].banner) {
+                if (item.src === listBanner[0]?.banner) {
                     item.classList.add(cx('animation-prev-three'));
                 }
-                if (item.src === listBanner[1].banner) {
+                if (item.src === listBanner[1]?.banner) {
                     item.classList.remove(cx('animation-prev-three'));
                     item.classList.add(cx('animation-prev-two'));
                 }
-                if (item.src === listBanner[2].banner) {
+                if (item.src === listBanner[2]?.banner) {
                     item.classList.remove(cx('animation-prev-two'));
                     item.classList.add(cx('animation-prev-one'));
                 }
@@ -143,12 +143,12 @@ function Slider() {
     }, [listBanner]);
     return (
         <div className={cx('slider')}>
-            {listBanner.map((item) => (
+            {listBanner.length > 0 && listBanner.map((item) => (
                 <img
                     className={cx('banner')}
                     onClick={() => handleClickBanner(item)}
-                    key={item.encodeId}
-                    src={item.banner}
+                    key={item?.encodeId}
+                    src={item?.banner}
                     alt=""
                 />
             ))}
