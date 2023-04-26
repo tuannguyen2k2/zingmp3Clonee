@@ -3,6 +3,7 @@ export const albumSlice = createSlice({
     name: 'album',
     initialState: {
         allowGetAlbum: false,
+        isAlbumSection: false,
         album: [],
     },
     reducers: {
@@ -11,10 +12,13 @@ export const albumSlice = createSlice({
         },
         getAlbum: (state,action) => {
             state.album = action.payload;
+        },
+        setIsAlbumSection: (state,action) => {
+            state.isAlbumSection = action.payload;
         }
     },
 });
 
-export const {setAllowGetAlbum, getAlbum} = albumSlice.actions
+export const {setAllowGetAlbum, getAlbum, setIsAlbumSection} = albumSlice.actions
 
 export default albumSlice.reducer

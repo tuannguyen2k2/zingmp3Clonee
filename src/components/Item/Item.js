@@ -20,7 +20,6 @@ const cx = classNames.bind(styles);
 function Item({ data, type, playingBar, search, isHover,heartAction, ...props }) {
     const [isClickPlay, setIsClickPlay] = useState(false);
     const classesSong = cx('result-item', 'songs', { playingBar, search, isHover });
-
     useEffect(() => {
         if (isClickPlay) {
             const resultApi = async () => {

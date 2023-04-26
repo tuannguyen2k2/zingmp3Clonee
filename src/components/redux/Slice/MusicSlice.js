@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const musicSlice = createSlice({
     name: 'music',
     initialState: {
-        curSongId: null,
+        curSongId: 'ZW8I8008',
     },
     reducers: {
         setCurSongId: (state, action) => {

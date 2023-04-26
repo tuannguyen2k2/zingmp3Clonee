@@ -6,38 +6,30 @@ import { useDispatch } from 'react-redux';
 import Button from '~/components/Button';
 import { setCurSongId } from '~/components/redux/Slice/MusicSlice';
 import { setIsPlaying } from '~/components/redux/Slice/SongSlice';
-import * as homeService from '~/services/homeService';
 import styles from './Slider.module.scss';
 
 const cx = classNames.bind(styles);
 let indexBannerOne = 0;
 let indexBannerTwo = 1;
 let indexBannerThree = 2;
-let listBannerResponse = [];
 let isListBannerNext = false;
 let isListBannerPrev = false;
 
-function Slider() {
+function Slider({ listBannerResponse }) {
     const [listBanner, setListBanner] = useState([]);
-
     const dispatch = useDispatch();
     useEffect(() => {
-        //Call Api
-        const resultApi = async () => {
-            const res = await homeService.home();
-            //Assign data banner for listBannerResponse
-            listBannerResponse = res?.data?.items[0]?.items;
-            //Set default 3 banner
-            setListBanner([
-                listBannerResponse[indexBannerOne],
-                listBannerResponse[indexBannerTwo],
-                listBannerResponse[indexBannerThree],
-            ]);
-            isListBannerNext = true;
-        };
-        resultApi();
-    }, []);
-
+        if(listBannerResponse.length === 0){
+            return;
+        }
+        setListBanner([
+            listBannerResponse[indexBannerOne],
+            listBannerResponse[indexBannerTwo],
+            listBannerResponse[indexBannerThree],
+        ]);
+        isListBannerNext = true;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [listBannerResponse]);
     const setListBannerPrev = () => {
         if (indexBannerOne === 0) {
             indexBannerOne = 6;
@@ -140,25 +132,30 @@ function Slider() {
         return () => {
             interValid && clearInterval(interValid);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [listBanner]);
     return (
-        <div className={cx('slider')}>
-            {listBanner.length > 0 && listBanner.map((item) => (
-                <img
-                    className={cx('banner')}
-                    onClick={() => handleClickBanner(item)}
-                    key={item?.encodeId}
-                    src={item?.banner}
-                    alt=""
-                />
-            ))}
-            <Button circle className={cx('btn-control', 'btn-left')} onClick={handleButtonLeft}>
-                <SlArrowLeft size={30} />
-            </Button>
-            <Button circle className={cx('btn-control', 'btn-right')} onClick={handleButtonRight}>
-                <SlArrowRight size={30} />
-            </Button>
-        </div>
+        <>
+            {listBanner.length > 0 && (
+                <div className={cx('slider')}>
+                    {listBanner.map((item) => (
+                        <img
+                            key={item?.encodeId}
+                            className={cx('banner')}
+                            onClick={() => handleClickBanner(item)}
+                            src={item?.banner}
+                            alt=""
+                        />
+                    ))}
+                    <Button circle className={cx('btn-control', 'btn-left')} onClick={handleButtonLeft}>
+                        <SlArrowLeft size={30} />
+                    </Button>
+                    <Button circle className={cx('btn-control', 'btn-right')} onClick={handleButtonRight}>
+                        <SlArrowRight size={30} />
+                    </Button>
+                </div>
+            )}
+        </>
     );
 }
 

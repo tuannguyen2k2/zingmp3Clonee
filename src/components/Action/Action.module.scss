@@ -1,7 +1,8 @@
-.wrapper{
+.wrapper {
     display: flex;
+    align-items: center;
 }
-.button{
+.button {
     height: 38px;
     width: 38px;
     padding: 6px;
@@ -9,8 +10,24 @@
 }
 .icon-fill {
     color: var(--purple-primary);
-    svg{
+    svg {
         width: 16px;
         height: 16px;
+    }
+}
+.play-section {
+    width: 60px;
+    height: 60px;
+    svg {
+        width: 50px;
+        height: 50px;
+    }
+}
+.heart-section,.menu-section{
+    width: 32px;
+    height: 32px;
+    svg {
+        width: 20px;
+        height: 20px;
     }
 }

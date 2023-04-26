@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '~/components/Button/Button';
 import { MicIcon, MvIcon, RestoreIcon, VolumeOffIcon, VolumeOnIcon } from '~/components/Icon';
 import Item from '~/components/Item/Item';
-import { getAlbum, setAllowGetAlbum } from '~/components/redux/Slice/AlbumSlice';
+import { getAlbum, setAllowGetAlbum, setIsAlbumSection } from '~/components/redux/Slice/AlbumSlice';
 import {
     setAllowNext,
     setAllowPrevious,
@@ -16,15 +16,17 @@ import {
 } from '~/components/redux/Slice/PlayingBarSlice';
 import { albumSelector, musicSelector, playingBarSelector, songSelector } from '~/components/redux/selectors';
 import * as songService from '~/services/songService';
-import { getAudio, getInfoSong } from '../../../redux/Slice/SongSlice';
+import { getAudio, getInfoSong, setIsPlaying } from '../../../redux/Slice/SongSlice';
 import ActionBar from './ActionBar';
 import styles from './PlayingBar.module.scss';
+import { setCurSongId } from '~/components/redux/Slice/MusicSlice';
+import { onToast } from '~/components/redux/Slice/ToastSlice';
 
 const cx = classNames.bind(styles);
 
 function PlayingBar() {
     const { audio, infoSong } = useSelector(songSelector);
-    const { album, allowGetAlbum } = useSelector(albumSelector);
+    const { album, allowGetAlbum, isAlbumSection } = useSelector(albumSelector);
     const { curSongId } = useSelector(musicSelector);
     const { volumeOn, curVolume, repeat } = useSelector(playingBarSelector);
     const dispatch = useDispatch();
@@ -34,13 +36,27 @@ function PlayingBar() {
     useEffect(() => {
         const resultApi = async () => {
             dispatch(setIsLoading(true));
-            if(audio !== null){
+            if (audio !== null) {
                 audio.pause();
             }
             const resInfoSong = await songService.infoSong(curSongId);
             const resAudioSong = await songService.audioSong(curSongId);
             dispatch(setIsLoading(false));
-            dispatch(getAudio(new Audio(resAudioSong?.data[128])));
+            try {
+                dispatch(getAudio(new Audio(resAudioSong?.data[128])));
+            } catch {
+                dispatch(onToast(resAudioSong.msg));
+                album.forEach((song, index) => {
+                    if (curSongId === song?.encodeId) {
+                        if (index === album.length - 1) {
+                            dispatch(setCurSongId(album[0].encodeId));
+                        } else {
+                            dispatch(setCurSongId(album[index + 1].encodeId));
+                        }
+                        dispatch(setIsPlaying(true));
+                    }
+                });
+            }
             dispatch(getInfoSong(resInfoSong?.data));
             let resPlayList;
             let flagApi = false;
@@ -66,9 +82,9 @@ function PlayingBar() {
         }
         if (curSongId === album[0]?.encodeId) {
             dispatch(setAllowPrevious(false));
-            console.log('hi');
         } else {
             let isSongInAlbum = false;
+            console.log(album);
             album.forEach((song, index) => {
                 if (curSongId === song.encodeId && index !== 0) {
                     isSongInAlbum = true;
@@ -83,19 +99,25 @@ function PlayingBar() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [curSongId]);
     useEffect(() => {
+        console.log(album);
+        if (isAlbumSection) {
+            dispatch(setCurSongId(album[0].encodeId));
+            dispatch(setIsPlaying(true));
+            dispatch(setIsAlbumSection(false));
+        }
         if (album.length > 1) {
             dispatch(setAllowNext(true));
-        } else{
+        } else {
             dispatch(setAllowNext(false));
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[album])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [album]);
 
     //Handle Click
 
     const handleVolume = () => {
         if (volumeOn) {
-            dispatch(setCurVolume(0));
+            dispatch(setCurVolume(audio.volume));
             audio.volume = 0;
             progressSliderVolumeRef.current.style.cssText = `width: ${0}%`;
         } else {

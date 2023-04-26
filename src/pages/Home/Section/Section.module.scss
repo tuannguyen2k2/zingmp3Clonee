@@ -42,3 +42,12 @@
 .column{
     width: 33.33%;
 }
+.play-list{
+    display: flex;
+}
+.item-section{
+    width: 20%;
+}
+.item-section + .item-section{
+    margin-left: 28px;
+}
